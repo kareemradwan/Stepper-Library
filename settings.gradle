@@ -1,0 +1,3 @@
+rootProject.name='Stepeer'
+include ':app'
+include ':stepeer'
