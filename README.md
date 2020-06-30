@@ -1,5 +1,18 @@
 # Stepper-Library
 
+## How Add Library To Your Project
+##### in `build.gradle` on Project Level you should add 
+##### `maven { url 'https://jitpack.io' }` in 
+`allprojects { 
+     repositories { 
+        maven { url 'https://jitpack.io' }
+      }
+ }   
+   `
+##### After Thet add `implementation 'com.github.kareemradwan:Stepper-Library:0.1'` in `build.gradle` in App Level
+##### in `dependencies` Tag
+
+
 ## How Library Work
 
 ##### We Need Create Step Class for Example `Order` and `OrderAdapter` 
