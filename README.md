@@ -12,8 +12,13 @@ allprojects {
       }
  }   
 ```
- After Thet add `implementation 'com.github.kareemradwan:Stepper-Library:0.2'` in `build.gradle` in App Level
+
+ After Thet add Library in `build.gradle` in App Level
  in `dependencies` Tag
+ 
+ ``` kotlin
+ implementation 'com.github.kareemradwan:Stepper-Library:0.3'
+ ```
 
 
 ## How Library Work
