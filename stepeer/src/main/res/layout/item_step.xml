@@ -3,9 +3,6 @@
     android:id="@+id/rootSingleStep"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
     android:orientation="horizontal">
 
     <LinearLayout
@@ -39,13 +36,13 @@
                 android:background="#2196F3"
                 android:minHeight="40dp" />
 
-            <View
-                android:minHeight="40dp"
+            <com.kradwan.stepeer.view.RoundedCornerLayout
                 android:id="@+id/stepDividerSolid"
-                android:layout_width="4dp"
+                android:layout_width="5dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:background="#2196F3"
+                android:minHeight="40dp"
                 android:visibility="gone" />
         </FrameLayout>
     </LinearLayout>
