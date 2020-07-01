@@ -1,4 +1,4 @@
-# Stepper-Library V0.2
+# Stepper-Library (0.4)
 
 ## Screenshots
 ![Image Result](https://media.giphy.com/media/f6micojJP1dpgwnB3E/giphy.gif)
@@ -17,7 +17,7 @@ allprojects {
  in `dependencies` Tag
  
  ``` kotlin
- implementation 'com.github.kareemradwan:Stepper-Library:0.3'
+ implementation 'com.github.kareemradwan:Stepper-Library:0.4'
  ```
 
 
