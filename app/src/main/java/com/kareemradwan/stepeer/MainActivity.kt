@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity(), SteeperView.SteeperHandler {
 
         val adapter = OrderAdapter(
             this, listOf(
-                Order(1, "Step1" , true),
+                Order(1, "Step1" ),
                 Order(2, "Step2"),
                 Order(3, "Step3"),
                 Order(4, "Step4")

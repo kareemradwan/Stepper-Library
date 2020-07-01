@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Stepeer</string>
+    <string name="title_label">Title</string>
+    <string name="d_2_hour_label">2 hour</string>
 </resources>

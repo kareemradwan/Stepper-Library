@@ -20,7 +20,7 @@ class OrderAdapter(private val context: Context, list: List<Order>) : StepAdapte
         val tvDescriptor = view.findViewById<TextView>(R.id.tvDesc)
 
         tvTitle.text = model.title
-        tvDescriptor.text = "${model.id}"
+        tvDescriptor.text = "This Sub Title of Cutome View ${model.id}"
 
         return view
     }
