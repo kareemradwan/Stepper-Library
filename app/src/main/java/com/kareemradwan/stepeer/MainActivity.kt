@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), SteeperView.SteeperHandler {
         steeper.setAdapter(adapter)
         // Assign Controller
 
-//        steeper.setController(this)
+        steeper.setController(this)
         nextStep.setOnClickListener { steeper.nextStep() }
 
     }
