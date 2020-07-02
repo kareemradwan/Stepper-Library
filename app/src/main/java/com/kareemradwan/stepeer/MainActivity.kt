@@ -15,10 +15,11 @@ class MainActivity : AppCompatActivity(), SteeperView.SteeperHandler {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        val order1 = Order(1, "Step1")
+        order1.setChecked(true)
         val adapter = OrderAdapter(
             this, listOf(
-                Order(1, "Step1" ),
+                order1,
                 Order(2, "Step2"),
                 Order(3, "Step3"),
                 Order(4, "Step4")
@@ -26,7 +27,6 @@ class MainActivity : AppCompatActivity(), SteeperView.SteeperHandler {
         )
         steeper.setAdapter(adapter)
         // Assign Controller
-
         steeper.setController(this)
         nextStep.setOnClickListener { steeper.nextStep() }
 
@@ -34,5 +34,9 @@ class MainActivity : AppCompatActivity(), SteeperView.SteeperHandler {
 
     override fun onFinish() {
         Toast.makeText(this, "Finish Steps", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onError(msg: String?) {
+        Toast.makeText(this, " Error $msg", Toast.LENGTH_LONG).show()
     }
 }

@@ -1,15 +1,20 @@
 package com.kareemradwan.stepeer
 
-
 import com.kradwan.stepeer.model.IStep
+import kotlinx.android.parcel.Parcelize
 
-data class Order(
+@Parcelize
+class Order(
     val id: Int,
-    val title: String,
-    var isCheck: Boolean = false
-) :
-    IStep {
+    val title: String
+) : IStep() {
 
+    /**
+     * You Can Override this Method to Add Some Code
+     */
+    override fun isChecked(): Boolean {
+        // You can put some code here
+        return super.isChecked()
+    }
 
-    override fun isChecked(): Boolean = isCheck
 }

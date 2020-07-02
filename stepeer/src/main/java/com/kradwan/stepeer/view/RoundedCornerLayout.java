@@ -9,6 +9,9 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.FrameLayout;
 
+/**
+ * This Class From Stackoverflow Website
+ */
 public class RoundedCornerLayout extends FrameLayout {
 
 
