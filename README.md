@@ -1,4 +1,4 @@
-# Stepper-Library (0.4)
+# Stepper-Library (0.5)
 
 ## Screenshots
 ![Image Result](https://media.giphy.com/media/f6micojJP1dpgwnB3E/giphy.gif)
@@ -17,7 +17,7 @@ allprojects {
  in `dependencies` Tag
  
  ``` kotlin
- implementation 'com.github.kareemradwan:Stepper-Library:0.4'
+ implementation 'com.github.kareemradwan:Stepper-Library:0.5'
  ```
 
 
@@ -39,8 +39,10 @@ You can Register The Activity as Controller to Notifiy When `SteeoerView` Finish
 
 
 ## What is Next:
-  - The Developer Can Custmise Color of Step.  (DONE)
- - Add Animation for `CheckBox` When be Selected
+  - [X] The Developer Can Custmise Color of Step. 
+  - [X] Save State of View When Device Rotate.
+  - [X] Custmaize Color for `unChecked` and `Checked` status
+  - [ ] Add Animation for `CheckBox` When be Selected
 
 
 ## Sample Code 
