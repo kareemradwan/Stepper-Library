@@ -20,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            app:checked_color="#342987"
-            app:unchecked_color="#909090" />
+            />
 
 
         <Button

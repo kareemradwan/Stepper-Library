@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.os.Parcelable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -14,6 +15,8 @@ import com.kradwan.stepeer.StepperState
 import com.kradwan.stepeer.adapter.StepAdapter
 import com.kradwan.stepeer.model.IStep
 import com.kradwan.stepeer.model.StepColor
+import com.kradwan.stepeer.model.StepDrawable
+import kotlinx.android.synthetic.main.item_step.view.*
 import java.lang.Exception
 
 /**
@@ -33,7 +36,8 @@ class SteeperView(context: Context, private val attrs: AttributeSet?) :
     // Index to Current Step to Save State
     private var currentStep: Int = 0
     // Colors of `unChecked` and `Checked` state
-    private var colors = HashMap<String, StepColor>()
+    private var colors = StepColor.default()
+    private var icons = StepDrawable.default(context)
     // Adapter of Stepper
     private lateinit var mAdapter: StepAdapter<IStep>
 
@@ -61,7 +65,7 @@ class SteeperView(context: Context, private val attrs: AttributeSet?) :
         // Get The List Of Steps if null [ First Time Open] Assign Empty List
         mAdapter.models = myState?.steps ?: listOf()
         // Pass Adapter to Build UI
-        setAdapter(mAdapter)
+        setAdapter(mAdapter , false)
         //redraw
     }
 
@@ -75,23 +79,36 @@ class SteeperView(context: Context, private val attrs: AttributeSet?) :
         if (attrs != null) {
             // Declare Default Color if The Developer Not Override the
             // 'unchecked_color' , 'checked_color';
-            val defaultColor = StepColor(Color.parseColor("#1C8AFF"))
             // Get the xml style attribute form view
             val style = context.theme.obtainStyledAttributes(attrs, R.styleable.SteeperView, 0, 0)
             /**
              * get First Value [ First from attr file not in XML Order ]
              * In our Example the First attr is `check`
              */
-            val checkColor = style.getColor(0, -1)
-            // In our Example the First attr is `uncheck`
-            val unCheckColor = style.getColor(1, -1)
-            /**
-             * Short IF To Check if Override Values of [checked , unchecked color]
-             */
+            val checkColor = style.getColor(R.styleable.SteeperView_checked_color, -1)
+            val unCheckColor = style.getColor(R.styleable.SteeperView_unchecked_color, -1)
+            val checkIcon = style.getDrawable(R.styleable.SteeperView_checked_icon)
+            val unCheckIcon = style.getDrawable(R.styleable.SteeperView_unchecked_icon)
+
+
             colors[StepColor.COLOR_CHECKED] =
-                if (checkColor != -1) StepColor(checkColor) else defaultColor
+                if (checkColor != -1) StepColor(checkColor) else StepColor(StepColor.defaultColor)
             colors[StepColor.COLOR_UNCHECKED] =
-                if (unCheckColor != -1) StepColor(unCheckColor) else defaultColor
+                if (unCheckColor != -1) StepColor(unCheckColor) else StepColor(StepColor.defaultColor)
+
+
+            /**
+             * Extract Drawable for [ Checked and unChecked]
+             */
+            if (checkIcon != null) {
+                icons[StepDrawable.DRAWABLE_CHECKED] = StepDrawable(checkIcon)
+            }
+
+            if (unCheckIcon != null) {
+                icons[StepDrawable.DRAWABLE_UNCHECKED] = StepDrawable(unCheckIcon)
+            }
+
+
         }
     }
 
@@ -100,7 +117,7 @@ class SteeperView(context: Context, private val attrs: AttributeSet?) :
      * and Show in screen
      * @param adapter Any Class Inherited [StepAdapter]
      */
-    fun <T : IStep> setAdapter(adapter: StepAdapter<T>) {
+    fun <T : IStep> setAdapter(adapter: StepAdapter<T> , animated: Boolean = true) {
         try {
             // because we need assign adapter to global variable
             // we need Cast generic Type to IStep
@@ -119,9 +136,9 @@ class SteeperView(context: Context, private val attrs: AttributeSet?) :
                     currentStep++
                 }
                 // View of Single Step Without Any Actual Data
-                val step = SingleStepView(view.context, colors)
+                val step = SingleStepView(view.context, colors, icons)
                 // Assign Actual Data to Step View
-                step.setModel(it, adapter.onCreateView(it), adapter.models.last() == it)
+                step.setModel(it, adapter.onCreateView(it), adapter.models.last() == it , animated)
                 // Add Step in Container of Steps
                 containerSteeper.addView(step)
             }
@@ -144,7 +161,7 @@ class SteeperView(context: Context, private val attrs: AttributeSet?) :
      */
     private fun selectAsDone(index: Int) {
         val stepView = containerSteeper[index] as SingleStepView
-        stepView.selectAsDone()
+        stepView.selectAsDone(true)
     }
 
     fun nextStep() {

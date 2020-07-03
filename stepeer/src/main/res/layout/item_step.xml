@@ -12,14 +12,13 @@
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
-        <CheckBox
-
+        <ImageView
             android:id="@+id/stepCheckBok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:button="@drawable/custom_checkbox"
             android:checked="true"
+            android:contentDescription="@string/step_icon_label"
             android:enabled="false"
             android:gravity="center_vertical" />
 
