@@ -109,6 +109,7 @@ class SteeperView(context: Context, private val attrs: AttributeSet?) :
              * We need Remove all View in `containerSteeper`
              * because when restore State `onRestoreInstanceState` to duplicate Views
              */
+            currentStep = 0
             containerSteeper.removeAllViews()
             // Iterate in List of IStep and Build View for Each Model From Adapter
             mAdapter.models.forEach {
