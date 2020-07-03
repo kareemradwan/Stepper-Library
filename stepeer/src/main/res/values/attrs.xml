@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="SteeperView" >
-        <attr name="checked_color" format="color|reference"  />
+    <declare-styleable name="SteeperView">
+        <attr name="checked_color" format="color|reference" />
         <attr name="unchecked_color" format="color|reference" />
+        <attr name="checked_icon" format="reference" />
+        <attr name="unchecked_icon" format="reference" />
     </declare-styleable>
 
 </resources>

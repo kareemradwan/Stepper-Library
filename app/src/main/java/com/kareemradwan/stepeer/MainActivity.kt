@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity(), SteeperView.SteeperHandler {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val order1 = Order(1, "Step1")
+        val order1 = Order(1, "Step1" , true)
         order1.setChecked(true)
         val adapter = OrderAdapter(
             this, listOf(

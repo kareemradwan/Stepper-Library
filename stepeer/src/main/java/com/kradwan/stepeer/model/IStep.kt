@@ -12,19 +12,17 @@ import android.os.Parcelable
  * The Class you need To Create Must be Annotated with
  * `@Parcelize` Annotation to be save state when Device Rotate for example
  */
-abstract class IStep(private var isChecked: Boolean = false) : Parcelable {
+ interface IStep : Parcelable {
 
     /**
      * Getter Method for Checked Variable
      * you can Override this Method to run custom code
      */
-    open fun isChecked(): Boolean = isChecked
+     fun isChecked(): Boolean
 
     /**
      * Setter Method For Checked Variable
      * you can Override this Method to run custom code
      */
-    open fun setChecked(isChecked: Boolean) {
-        this.isChecked = isChecked
-    }
+     fun setChecked(isChecked: Boolean)
 }
