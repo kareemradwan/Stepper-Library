@@ -1,4 +1,4 @@
-# Stepper-Library (0.5)
+# Stepper-Library (0.5.2)
 
 ## Screenshots
 ![Image Result](https://media.giphy.com/media/f6micojJP1dpgwnB3E/giphy.gif)
@@ -17,7 +17,7 @@ allprojects {
  in `dependencies` Tag
  
  ``` kotlin
- implementation 'com.github.kareemradwan:Stepper-Library:0.5'
+ implementation 'com.github.kareemradwan:Stepper-Library:0.5.2'
  ```
 
 
@@ -60,7 +60,7 @@ In Xml
 In Kotlin
 ```kotlin
 val mList = listOf(
-     Order(1, "Step1", true),
+     Order(1, "Step1"),
      Order(2, "Step2"),
      Order(3, "Step3"),
      Order(4, "Step4")
@@ -73,6 +73,8 @@ val mList = listOf(
  btnNextStep.setOnClickListener { steeper.nextStep() }
 ```
 
+## Note
+you can show the example in this repo.
 
 ## About Developer:
 Name: Kareem E Radwan
