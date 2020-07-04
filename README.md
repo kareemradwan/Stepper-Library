@@ -42,6 +42,7 @@ You can Register The Activity as Controller to Notifiy When `SteeoerView` Finish
   - [X] The Developer Can Custmise Color of Step. 
   - [X] Save State of View When Device Rotate.
   - [X] Custmaize Color for `unChecked` and `Checked` status
+  - [X] Add Number Stepper View
   - [ ] Add Animation for `CheckBox` When be Selected
 
 

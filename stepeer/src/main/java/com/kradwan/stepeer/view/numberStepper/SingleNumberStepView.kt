@@ -1,15 +1,13 @@
-package com.kradwan.stepeer.view
+package com.kradwan.stepeer.view.numberStepper
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.*
 import com.kradwan.stepeer.R
+import com.kradwan.stepeer.model.Constants
 import com.kradwan.stepeer.model.IStep
 import com.kradwan.stepeer.model.StepColor
 import com.kradwan.stepeer.model.StepDrawable
@@ -20,7 +18,7 @@ import com.kradwan.stepeer.model.StepDrawable
  */
 
 @SuppressLint("ViewConstructor")
-class SingleStepView(
+internal class SingleNumberStepView(
     context: Context,
     private var colors: HashMap<String, StepColor>,
     private var icons: HashMap<String, StepDrawable>
@@ -31,14 +29,14 @@ class SingleStepView(
     private lateinit var view: View
     private lateinit var rootView: LinearLayout
     private lateinit var stepInfo: LinearLayout
-    private lateinit var stepCheckBox: ImageView
+
+    private lateinit var stepCheckBox: FrameLayout
+    private lateinit var stepLabel: TextView
+    //    private lateinit var stepCheckBox: CheckBox
     private lateinit var stepDivider: View
     private lateinit var stepDividerSolid: View
     private lateinit var stepContentContainer: LinearLayout
 
-    // Setup Default Color if you not set in your XML View `StepperView`
-    private var checkBoxSelectedColor: StepColor = StepColor(Color.CYAN)
-    private var checkBoxUnSelectedColor: StepColor = StepColor(Color.BLUE)
 
     /**
      * This Code Call When Construct this Class
@@ -50,37 +48,20 @@ class SingleStepView(
 
     @SuppressLint("ResourceType")
     private fun initViews() {
-        view = inflate(context, R.layout.item_step, this)
+        view = inflate(context, R.layout.item_num_step, this)
         rootView = view.findViewById(R.id.rootSingleStep)
         stepInfo = view.findViewById(R.id.stepInfo)
         stepCheckBox = view.findViewById(R.id.stepCheckBok)
+        stepLabel = view.findViewById(R.id.tvStepLabel)
         stepDivider = view.findViewById(R.id.stepDivider)
         stepDividerSolid = view.findViewById(R.id.stepDividerSolid)
         stepContentContainer = view.findViewById(R.id.stepContentContainer)
 
+        // Init Default Values OF UI COLORS and IMAGES
+        stepCheckBox.background = (icons[Constants.STEP_ICON_UNCHECKED]!!.drawable)
+        stepDivider.setBackgroundColor(colors[Constants.DIVIDER_COLOR_UNCHECKED]!!.color)
+        stepDividerSolid.setBackgroundColor(colors[Constants.DIVIDER_COLOR_UNCHECKED]!!.color)
 
-        if (icons[StepDrawable.DRAWABLE_UNCHECKED] != null) {
-            stepCheckBox.setImageDrawable(icons[StepDrawable.DRAWABLE_UNCHECKED]?.drawable)
-        }
-        /**
-         * Check if you Override Default Colors
-         */
-        // Check if you override `Checked` state Color
-        // Change Default Color to your Custom Color
-        checkBoxSelectedColor = colors[StepColor.COLOR_CHECKED]!!
-
-        /**
-         *  Check if you override `unChecked` state Color
-         *  because UnCheck Color is Default and initial State you need Override View Color
-         */
-        checkBoxUnSelectedColor = colors[StepColor.COLOR_UNCHECKED]!!
-        stepDivider.setBackgroundColor(checkBoxUnSelectedColor.color)
-        stepDividerSolid.setBackgroundColor(checkBoxUnSelectedColor.color)
-
-        /**
-         * Support sdk 15 and higher than it
-         * Change Tint of Checkbox to checkBoxUnSelectedColor
-         */
 
     }
 
@@ -90,11 +71,17 @@ class SingleStepView(
      * @param view Generate View from Adapter
      * @param last to hide last Divider
      */
-    fun <T : IStep> setModel(model: T, view: View, last: Boolean, animated: Boolean) {
+    fun <T : IStep> setModel(model: T, view: View, last: Boolean, animated: Boolean, label: Int) {
         // Set Init State of Checkbox
-//        stepCheckBox.isChecked = model.isChecked()
-        stepDivider.visibility = if (last) View.GONE else View.VISIBLE
+//        stepLabel.setTextColor(colors[StepColor.COLOR_UNCHECKED]!!.color)
 
+//        stepCheckBox.setBackgroundResource(R.drawable.ic_radio_button_unchecked_black_24dp)
+        stepDivider.visibility = if (last) View.GONE else View.VISIBLE
+//        stepCheckBox.setBackgroundResource(icons[StepDrawable.DRAWABLE_UNCHECKED]!!.id)
+//        stepCheckBox.background = icons[StepColor.STEP_ICON_CHECKED]!!.drawable
+
+        Log.d("DDDD", " Label ${label}")
+        stepLabel.text = "$label"
         /**
          * The Code inside post method call when
          * `stepContentContainer` finish Draw in Screen
@@ -129,10 +116,12 @@ class SingleStepView(
 
 
     /**
-     * This Method Change UI State From UnChecked to Checked
+     * This Method Change UI State From UnChecked to
+     * Checked
      */
     fun selectAsDone(animated: Boolean) {
-        stepCheckBox.setImageDrawable(icons[StepDrawable.DRAWABLE_CHECKED]?.drawable)
+        stepCheckBox.background = icons[Constants.STEP_ICON_CHECKED]!!.drawable
+        stepLabel.setTextColor(colors[Constants.NUM_TEXT_COLOR_CHECKED]!!.color)
 
         /**
          * Support sdk 15 and higher than it
@@ -140,12 +129,12 @@ class SingleStepView(
          */
 
         if (animated) {
-            stepDividerSolid.setBackgroundColor(colors[StepColor.COLOR_CHECKED]!!.color)
+            stepDividerSolid.setBackgroundColor(colors[Constants.DIVIDER_COLOR_CHECKED]!!.color)
             stepDividerSolid.visibility = View.VISIBLE
             val move = AnimationUtils.loadAnimation(context, R.anim.move)
             stepDividerSolid.animation = move
         } else {
-            stepDividerSolid.setBackgroundColor(checkBoxSelectedColor.color)
+            stepDividerSolid.setBackgroundColor(colors[Constants.DIVIDER_COLOR_CHECKED]!!.color)
             stepDividerSolid.visibility = View.VISIBLE
         }
     }

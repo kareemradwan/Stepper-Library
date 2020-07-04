@@ -29,6 +29,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:minWidth="35dp"
+                android:textStyle="bold"
                 android:minHeight="35dp"
                 tools:text="2"
                 android:textAlignment="center" />

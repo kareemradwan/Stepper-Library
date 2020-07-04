@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.kradwan.stepeer.view.SteeperView
+import com.kradwan.stepeer.view.verticalStepper.SteeperView
 import kotlinx.android.synthetic.main.activity_main.*
 
 

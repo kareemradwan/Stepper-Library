@@ -1,11 +1,10 @@
-package com.kradwan.stepeer.view
+package com.kradwan.stepeer.view.numberStepper
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -15,10 +14,9 @@ import com.kradwan.stepeer.R
 import com.kradwan.stepeer.StepperState
 import com.kradwan.stepeer.adapter.StepAdapter
 import com.kradwan.stepeer.model.IStep
+import com.kradwan.stepeer.model.Constants
 import com.kradwan.stepeer.model.StepColor
 import com.kradwan.stepeer.model.StepDrawable
-import com.kradwan.stepeer.model.StepResource
-import kotlinx.android.synthetic.main.item_step.view.*
 import java.lang.Exception
 
 /**
@@ -88,18 +86,6 @@ class NumberStepperView(context: Context, private val attrs: AttributeSet?) :
              * get First Value [ First from attr file not in XML Order ]
              * In our Example the First attr is `check`
              */
-
-            /**
-             *  <attr name="num_text_color_checked" format="color"/>
-            <attr name="num_text_color_unchecked" format="color"/>
-
-            <attr name="step_icon_checked" format="reference"/>
-            <attr name="step_icon_unchecked" format="reference"/>
-
-            <attr name="divider_color_checked" format="color"/>
-            <attr name="divider_color_unchecked" format="color"/>
-             */
-
             val numTextColorChecked =
                 style.getColor(R.styleable.NumberStepperView_num_text_color_checked, -1)
             val numTextColorUnChecked =
@@ -110,71 +96,49 @@ class NumberStepperView(context: Context, private val attrs: AttributeSet?) :
                 style.getColor(R.styleable.NumberStepperView_divider_color_unchecked, -1)
 
 
-            val iconChecked = style.getResourceId(R.styleable.SteeperView_checked_icon, -1)
-            val iconUnChecked = style.getResourceId(R.styleable.SteeperView_unchecked_icon, -1)
-
-            colors[StepColor.NUM_TEXT_COLOR_CHECKED] =
+            colors[Constants.NUM_TEXT_COLOR_CHECKED] =
                 if (numTextColorChecked != -1) StepColor(numTextColorChecked) else StepColor(
                     Color.parseColor(
                         "#456333"
                     )
                 )
 
-            colors[StepColor.NUM_TEXT_COLOR_UNCHECKED] =
+            colors[Constants.NUM_TEXT_COLOR_UNCHECKED] =
                 if (numTextColorUnChecked != -1) StepColor(numTextColorUnChecked) else StepColor(
                     Color.parseColor("#456333")
                 )
 
-            colors[StepColor.DIVIDER_COLOR_CHECKED] =
+            colors[Constants.DIVIDER_COLOR_CHECKED] =
                 if (dividerColorChecked != -1) StepColor(dividerColorChecked) else StepColor(
                     Color.parseColor(
                         "#456333"
                     )
                 )
-            colors[StepColor.DIVIDER_COLOR_UNCHECKED] =
+            colors[Constants.DIVIDER_COLOR_UNCHECKED] =
                 if (dividerColorUnChecked != -1) StepColor(dividerColorUnChecked) else StepColor(
                     Color.parseColor("#456333")
                 )
 
 
-            icons[StepColor.STEP_ICON_UNCHECKED] = StepDrawable.fromId(context ,iconChecked)
-            icons[StepColor.STEP_ICON_CHECKED] = StepDrawable.fromId( context ,iconUnChecked)
-
-//            val stepIconChecked = style.getDrawable(R.styleable.NumberStepperView_step_icon_checked)
-//            val stepIconUnChecked = style.getDrawable(R.styleable.NumberStepperView_step_icon_unchecked)
+            val stepIconChecked = style.getDrawable(R.styleable.NumberStepperView_step_icon_checked)
+            val stepIconUnChecked =
+                style.getDrawable(R.styleable.NumberStepperView_step_icon_unchecked)
 //
-//            icons[StepColor.STEP_ICON_CHECKED] =
-//                if (stepIconChecked == null) StepDrawable(
-//                    ContextCompat.getDrawable(
-//                        context,
-//                        R.drawable.ic_check_circle_black_24dp
-//                    )!!
-//                ) else StepDrawable(stepIconChecked)
-//
-//            icons[StepColor.STEP_ICON_UNCHECKED] =
-//                if (stepIconChecked == null) StepDrawable(
-//                    ContextCompat.getDrawable(
-//                        context,
-//                        R.drawable.ic_check_circle_black_24dp
-//                    )!!
-//                ) else StepDrawable(stepIconChecked)
+            icons[Constants.STEP_ICON_CHECKED] =
+                if (stepIconChecked == null) StepDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.bg_rounded_fill
+                    )!!
+                ) else StepDrawable(stepIconChecked)
 
-//            icons[StepColor.STEP_ICON_UNCHECKED] = StepDrawable(stepIconChecked!!)
-
-
-//            colors[StepColor.COLOR_CHECKED] =
-//                if (checkColor != -1) StepColor(checkColor) else StepColor(Color.parseColor("#456333"))
-
-//            colors[StepColor.COLOR_UNCHECKED] =
-//                if (unCheckColor != -1) StepColor(unCheckColor) else StepColor(Color.parseColor("#456333"))
-//
-//            icons[StepDrawable.DRAWABLE_CHECKED] =
-//                if (checkIcon != -1) StepResource(checkIcon) else StepResource(R.drawable.ic_check_circle_black_24dp)
-//
-//
-//            icons[StepDrawable.DRAWABLE_UNCHECKED] =
-//                if (unCheckIcon != -1) StepResource(unCheckIcon) else StepResource(R.drawable.ic_radio_button_unchecked_black_24dp)
-
+            icons[Constants.STEP_ICON_UNCHECKED] =
+                if (stepIconUnChecked == null) StepDrawable(
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_radio_button_unchecked_black_24dp
+                    )!!
+                ) else StepDrawable(stepIconUnChecked)
 
         }
     }
@@ -204,10 +168,13 @@ class NumberStepperView(context: Context, private val attrs: AttributeSet?) :
                     // Increase Indicator of Where Stepper is Stopped
                     currentStep++
                 }
-                Log.d("DDDD", icons.toString())
-                Log.d("DDDD", colors.toString())
                 // View of Single Step Without Any Actual Data
-                val step = SingleNumberStepView(view.context, colors, icons)
+                val step =
+                    SingleNumberStepView(
+                        view.context,
+                        colors,
+                        icons
+                    )
                 // Assign Actual Data to Step View
                 step.setModel(
                     it,
@@ -220,9 +187,6 @@ class NumberStepperView(context: Context, private val attrs: AttributeSet?) :
                 containerSteeper.addView(step)
             }
         } catch (ex: Exception) {
-            ex.printStackTrace()
-            Log.d("DDDD", " EX 22 ${ex.localizedMessage}")
-            // Handle Any Error and return back to Activity
             callback?.onError(ex.localizedMessage)
         }
     }
