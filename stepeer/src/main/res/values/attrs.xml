@@ -2,10 +2,25 @@
 <resources>
 
     <declare-styleable name="SteeperView">
+
         <attr name="checked_color" format="color|reference" />
         <attr name="unchecked_color" format="color|reference" />
         <attr name="checked_icon" format="reference" />
         <attr name="unchecked_icon" format="reference" />
+
+    </declare-styleable>
+
+
+    <declare-styleable name="NumberStepperView">
+        <attr name="num_text_color_checked" format="color"/>
+        <attr name="num_text_color_unchecked" format="color"/>
+
+        <attr name="step_icon_checked" format="reference"/>
+        <attr name="step_icon_unchecked" format="reference"/>
+
+        <attr name="divider_color_checked" format="color"/>
+        <attr name="divider_color_unchecked" format="color"/>
+
     </declare-styleable>
 
 </resources>
