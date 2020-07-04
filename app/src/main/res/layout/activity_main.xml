@@ -15,10 +15,25 @@
         tools:context=".MainActivity">
 
 
-        <com.kradwan.stepeer.view.SteeperView
+        <com.kradwan.stepeer.view.numberStepper.NumberStepperView
             android:id="@+id/steeper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
+            app:divider_color_checked="@color/colorAccent"
+            app:divider_color_unchecked="@android:color/black"
+            app:num_text_color_checked="#fffff2"
+            app:num_text_color_unchecked="@android:color/black"
+            android:padding="20dp"
+            />
+
+
+
+        <com.kradwan.stepeer.view.verticalStepper.SteeperView
+            android:id="@+id/steeper2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:checked_color="@android:color/white"
             android:padding="20dp"
             />
 

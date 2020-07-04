@@ -8,8 +8,10 @@ import com.kradwan.stepeer.R
 class StepDrawable(var drawable: Drawable) {
 
     companion object {
+
         const val DRAWABLE_CHECKED = "checked_drawable"
         const val DRAWABLE_UNCHECKED = "unchecked_drawable"
+
 
         private val defaultIconId = R.drawable.ic_star_black_24dp
 
@@ -20,5 +22,11 @@ class StepDrawable(var drawable: Drawable) {
                 Pair(DRAWABLE_UNCHECKED, StepDrawable(drawable))
             )
         }
+
+        fun  fromId(context: Context , id: Int)  : StepDrawable{
+            return StepDrawable(ContextCompat.getDrawable(context , id)!!)
+        }
     }
 }
+
+class StepResource(var id: Int)

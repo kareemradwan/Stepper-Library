@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.kradwan.stepeer.view.SteeperView
+import com.kradwan.stepeer.view.verticalStepper.SteeperView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity(), SteeperView.SteeperHandler {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val order1 = Order(1, "Step1" , true)
+        val order1 = Order(1, "Step1", true)
         order1.setChecked(true)
         val adapter = OrderAdapter(
             this, listOf(
@@ -26,9 +26,13 @@ class MainActivity : AppCompatActivity(), SteeperView.SteeperHandler {
             )
         )
         steeper.setAdapter(adapter)
+        steeper2.setAdapter(adapter)
         // Assign Controller
-        steeper.setController(this)
-        nextStep.setOnClickListener { steeper.nextStep() }
+//        steeper.setController(this)
+        nextStep.setOnClickListener {
+            steeper.nextStep()
+            steeper2.nextStep()
+        }
 
     }
 
